@@ -14,6 +14,38 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+        public PartialViewResult TeacherView()
+        {
+            var teacher = db.Teachers.First();
+            return PartialView("_TeacherViewPartial");
+        }
+
+        [HttpPost]
+        public PartialViewResult TeacherView(int id)
+        {
+            int creditRemain = db.Teachers.Where(x => x.TeacherId == id).SingleOrDefault().CreditTobeTaken;
+            var courseTakenByTeacher = db.CourseAssignToTeachers.Where(x => x.TeacherId == id).ToList();
+
+            creditRemain = courseTakenByTeacher.Aggregate(creditRemain, (current, x) => current - x.Course.Credit);
+
+            ViewBag.creditRemain = creditRemain;
+            var teacher = db.Teachers.SingleOrDefault(x => x.TeacherId == id);
+            return PartialView("_TeacherViewPartial",teacher);
+        }
+        public PartialViewResult CourseView()
+        {
+            var course = db.Courses.First();
+            return PartialView("_CourseViewPartial");
+        }
+
+        [HttpPost]
+        public PartialViewResult CourseView(int id)
+        {
+            var course = db.Courses.SingleOrDefault(x => x.CourseId == id);
+
+            return PartialView("_CourseViewPartial",course);
+        }
+
         // GET: CourseAssignToTeachers
         public ActionResult Index()
         {
