@@ -14,9 +14,22 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+        public PartialViewResult _AllocateClassRoomPartial()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public PartialViewResult _AllocateClassRoomPartial(int id)
+        {
+            var allocateClassRoomList = db.AllocateClassRooms.Where(x => x.DeptId == id).ToList();
+            return PartialView(allocateClassRoomList);
+        }
+
         // GET: AllocateClassRooms
         public ActionResult Index()
         {
+            ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code");
             var allocateClassRooms = db.AllocateClassRooms.Include(a => a.Course).Include(a => a.Department);
             return View(allocateClassRooms.ToList());
         }
@@ -53,9 +66,25 @@ namespace UniversityMnagementSystemMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AllocateClassRooms.Add(allocateClassRoom);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var allocate = db.AllocateClassRooms.Where(x=>x.RoomNo==allocateClassRoom.RoomNo).ToList();
+                bool IsTimeAvailable = true;
+
+                foreach (var source in allocate)
+                {
+                        if (!(((allocateClassRoom.FromTime >= source.FromTime) && (allocateClassRoom.ToTime >= source.ToTime)) || ((allocateClassRoom.FromTime <= source.FromTime) && (allocateClassRoom.ToTime <= source.ToTime))))
+                        {
+                            IsTimeAvailable = false;
+                            ViewBag.noTime = "This time is not available";
+                            break;
+                        }
+                }
+
+                if (IsTimeAvailable)
+                {
+                    db.AllocateClassRooms.Add(allocateClassRoom);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", allocateClassRoom.CourseId);

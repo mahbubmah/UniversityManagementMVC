@@ -179,6 +179,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\jquery.datetimepicker.js" />
+    <Content Include="Content\jquery.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -275,6 +278,7 @@
     <Content Include="Views\EnrollInACourses\Index.cshtml" />
     <Content Include="Views\Shared\_StudentViewPartial.cshtml" />
     <Content Include="Views\Results\_ResultPartial.cshtml" />
+    <Content Include="Views\AllocateClassRooms\_AllocateClassRoomPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,7 +6,6 @@
 
 <h2>Create</h2>
 
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -16,23 +15,23 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.DeptId, "DeptId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DeptId, "Department Code", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DeptId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("DeptId", null,"--Select--" , new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseId, "Course Code", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CourseId", null,"--Select--" , new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FromTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FromTime, "From", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FromTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FromTime, "", new { @class = "text-danger" })
@@ -40,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ToTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ToTime, "To", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ToTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ToTime, "", new { @class = "text-danger" })
@@ -48,16 +47,31 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RoomNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RoomNo,"Room No" , new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RoomNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("RoomNo", new List<SelectListItem>
+                {
+                    new SelectListItem(){ Text = "101", Value = "101"},
+                    new SelectListItem(){ Text = "102", Value = "102"},
+                    new SelectListItem(){ Text = "103", Value = "103"},
+                    new SelectListItem(){ Text = "104", Value = "104"},
+                    new SelectListItem(){ Text = "105", Value = "105"},
+                    new SelectListItem(){ Text = "106", Value = "106"},
+                    new SelectListItem(){ Text = "107", Value = "107"},
+                    new SelectListItem(){ Text = "108", Value = "108"}
+
+                }, "--Select--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RoomNo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Allocate" class="btn btn-success" />
+                @if (ViewBag.noTime != null)
+                {
+                    <label style="color: red">@ViewBag.noTime</label>
+                }
             </div>
         </div>
     </div>
