@@ -14,6 +14,19 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+        [HttpPost]
+        public ActionResult DeleteAll()
+        {
+            var courseAssingToTeacher = db.CourseAssignToTeachers.ToList();
+            foreach (var toTeacher in courseAssingToTeacher)
+            {
+                db.CourseAssignToTeachers.Remove(toTeacher);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
         public PartialViewResult TeacherView()
         {
             var teacher = db.Teachers.First();

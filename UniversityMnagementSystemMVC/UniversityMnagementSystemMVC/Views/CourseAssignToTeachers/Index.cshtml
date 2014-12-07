@@ -23,23 +23,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department.Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Teacher.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CourseAssignToTeacherId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CourseAssignToTeacherId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseAssignToTeacherId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CourseAssignToTeacherId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.CourseAssignToTeacherId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.CourseAssignToTeacherId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@using (Html.BeginForm("DeleteAll", "CourseAssignToTeachers", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Unassign courses" class="btn btn-success form-group" />
+            </div>
+        </div>
+    </div>
+}

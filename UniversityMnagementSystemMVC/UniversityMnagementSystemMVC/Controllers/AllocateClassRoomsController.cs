@@ -14,6 +14,19 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+        [HttpPost]
+        public ActionResult DeleteAll()
+        {
+            var allocateClassRoom = db.AllocateClassRooms.ToList();
+            foreach (var allocate in allocateClassRoom)
+            {
+                db.AllocateClassRooms.Remove(allocate);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
         public PartialViewResult _AllocateClassRoomPartial()
         {
             return PartialView();
@@ -147,11 +160,14 @@ namespace UniversityMnagementSystemMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             AllocateClassRoom allocateClassRoom = db.AllocateClassRooms.Find(id);
             db.AllocateClassRooms.Remove(allocateClassRoom);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {
