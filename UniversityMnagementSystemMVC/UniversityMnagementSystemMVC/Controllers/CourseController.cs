@@ -8,11 +8,56 @@ using System.Web;
 using System.Web.Mvc;
 using UniversityMnagementSystemMVC.Models;
 
+
 namespace UniversityMnagementSystemMVC.Controllers
 {
     public class CourseController : Controller
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
+
+        public ActionResult CourseInformationView()
+        {
+            CourseInformatonViewModel aCourseInformatonViewModel = new CourseInformatonViewModel();
+            aCourseInformatonViewModel.Departments = db.Departments.ToList();
+            aCourseInformatonViewModel.Teachers = db.Teachers.ToList();
+            aCourseInformatonViewModel.CourseAssignToTeachers = db.CourseAssignToTeachers.ToList();
+            aCourseInformatonViewModel.Courses = db.Courses.ToList();
+            return View(aCourseInformatonViewModel);
+        }
+
+        [HttpPost]
+        public PartialViewResult _CourseInformationViewPartial(int id)
+        {
+            CourseInformatonViewModel aCourseInformatonViewModel = new CourseInformatonViewModel();
+            aCourseInformatonViewModel.Departments = db.Departments.ToList();
+            aCourseInformatonViewModel.CourseAssignToTeachers = db.CourseAssignToTeachers.Where(x=>x.DeptId==id).ToList();
+
+            foreach (var teacher in db.Teachers.ToList())
+            {
+                foreach (var source in aCourseInformatonViewModel.CourseAssignToTeachers)
+                {
+                    if (source.TeacherId==teacher.TeacherId)
+                    {
+                        
+                        var tech = db.Teachers.Where(x => x.TeacherId == source.TeacherId).ToList();
+                        aCourseInformatonViewModel.Teachers=tech;
+                    }
+                }
+            }
+            foreach (var course in db.Courses.ToList())
+            {
+                foreach (var source in aCourseInformatonViewModel.CourseAssignToTeachers)
+                {
+                    if (source.CourseId==course.CourseId)
+                    {
+                        var cou = db.Courses.Where(x => x.CourseId == source.CourseId).ToList();
+                        aCourseInformatonViewModel.Courses=cou;
+                    }
+                }
+            }
+            return PartialView(aCourseInformatonViewModel);
+        }
+
 
         // GET: Course
         public ActionResult Index()

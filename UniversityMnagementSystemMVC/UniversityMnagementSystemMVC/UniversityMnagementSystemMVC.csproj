@@ -126,7 +126,7 @@
     <Compile Include="Controllers\EnrollInACoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -146,6 +146,7 @@
     <Compile Include="Models\EnrollInACourse.cs">
       <DependentUpon>UniversityMvcDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManageViewModel.cs" />
     <Compile Include="Models\Result.cs">
       <DependentUpon>UniversityMvcDB.tt</DependentUpon>
     </Compile>
@@ -248,11 +249,6 @@
     <Content Include="Views\CourseAssignToTeachers\Details.cshtml" />
     <Content Include="Views\CourseAssignToTeachers\Edit.cshtml" />
     <Content Include="Views\CourseAssignToTeachers\Index.cshtml" />
-    <Content Include="Views\Student\Create.cshtml" />
-    <Content Include="Views\Student\Delete.cshtml" />
-    <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Student\Edit.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\AllocateClassRooms\Create.cshtml" />
     <Content Include="Views\AllocateClassRooms\Delete.cshtml" />
     <Content Include="Views\AllocateClassRooms\Details.cshtml" />
@@ -270,6 +266,13 @@
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\CourseAssignToTeachers\_CourseViewPartial.cshtml" />
     <Content Include="Views\CourseAssignToTeachers\_TeacherViewPartial.cshtml" />
+    <Content Include="Views\Course\CourseInformationView.cshtml" />
+    <Content Include="Views\Course\_CourseInformationViewPartial.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

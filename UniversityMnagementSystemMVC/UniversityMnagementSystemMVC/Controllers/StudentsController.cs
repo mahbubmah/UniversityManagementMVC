@@ -10,18 +10,18 @@ using UniversityMnagementSystemMVC.Models;
 
 namespace UniversityMnagementSystemMVC.Controllers
 {
-    public class StudentController : Controller
+    public class StudentsController : Controller
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
-        // GET: Student
+        // GET: Students
         public ActionResult Index()
         {
             var students = db.Students.Include(s => s.Department);
             return View(students.ToList());
         }
 
-        // GET: Student/Details/5
+        // GET: Students/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,14 +36,14 @@ namespace UniversityMnagementSystemMVC.Controllers
             return View(student);
         }
 
-        // GET: Student/Create
+        // GET: Students/Create
         public ActionResult Create()
         {
             ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code");
             return View();
         }
 
-        // POST: Student/Create
+        // POST: Students/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -52,6 +52,10 @@ namespace UniversityMnagementSystemMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                Random r=new Random();
+                int n = r.Next();
+                student.RegNo = n;
+                student.Department = db.Departments.Where(x => x.DeptId == student.DeptId).SingleOrDefault();
                 db.Students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,7 +65,7 @@ namespace UniversityMnagementSystemMVC.Controllers
             return View(student);
         }
 
-        // GET: Student/Edit/5
+        // GET: Students/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,7 +81,7 @@ namespace UniversityMnagementSystemMVC.Controllers
             return View(student);
         }
 
-        // POST: Student/Edit/5
+        // POST: Students/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -94,7 +98,7 @@ namespace UniversityMnagementSystemMVC.Controllers
             return View(student);
         }
 
-        // GET: Student/Delete/5
+        // GET: Students/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +113,7 @@ namespace UniversityMnagementSystemMVC.Controllers
             return View(student);
         }
 
-        // POST: Student/Delete/5
+        // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
