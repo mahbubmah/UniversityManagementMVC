@@ -14,9 +14,31 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+
+        public PartialViewResult StudentView()
+        {
+            return PartialView("_StudentViewPartial");
+        }
+
+        [HttpPost]
+        public PartialViewResult StudentView(int id)
+        {
+            var student = db.Students.SingleOrDefault(x => x.StudentId == id);
+            return PartialView("_StudentViewPartial", student);
+        }
+        [HttpPost]
+        public PartialViewResult _ResultPartial(int id)
+        {
+            
+            var results = db.Results.Where(x=>x.StuentId==id);
+            return PartialView(results.ToList());
+        }
+
+
         // GET: Results
         public ActionResult Index()
         {
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "RegNo");
             var results = db.Results.Include(r => r.Course).Include(r => r.Student);
             return View(results.ToList());
         }
@@ -40,7 +62,7 @@ namespace UniversityMnagementSystemMVC.Controllers
         public ActionResult Create()
         {
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name");
-            ViewBag.StuentId = new SelectList(db.Students, "StudentId", "Name");
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "RegNo");
             return View();
         }
 

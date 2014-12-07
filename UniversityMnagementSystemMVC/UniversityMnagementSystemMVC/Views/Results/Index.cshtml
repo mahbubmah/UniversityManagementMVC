@@ -1,45 +1,61 @@
-﻿@model IEnumerable<UniversityMnagementSystemMVC.Models.Result>
+﻿@using UniversityMnagementSystemMVC.Models
+@model IEnumerable<Result>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <label>Select Department</label>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        @try
+        {
+            <div class="form-group" id="studentInfo">
+                @Html.Partial("_StudentViewPartial")
+            </div>
+        }
+        catch (Exception exception)
+        {
+            <label>No Student Selected</label><br/>
+        }
+    </div>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Grade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Course.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.Name)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Grade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ResultId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ResultId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ResultId })
-        </td>
-    </tr>
+<div id="studentResult">
+    @Html.Partial("_ResultPartial")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            $("#StudentId").change(function () {
+                var id = $("#StudentId").val();
+                $("#studentInfo").load("StudentView", { id: id });
+            });
+        });
+    </script>
+    
+<script type="text/javascript">
+    $(function () {
+        $("#StudentId").change(function () {
+            var id = $("#StudentId").val();
+            $("#studentResult").load("_ResultPartial", { id: id });
+        });
+    });
+</script>
+    
 }
-
-</table>

@@ -68,13 +68,13 @@
             <PropertyRef Name="StudentId" />
           </Key>
           <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegNo" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContactNo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DeptId" Type="int" Nullable="false" />
-          <Property Name="RegNo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -389,13 +389,13 @@
             <PropertyRef Name="StudentId" />
           </Key>
           <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegNo" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DeptId" Type="Int32" Nullable="false" />
-          <Property Name="RegNo" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Student_Department" FromRole="Student" ToRole="Department" />
           <NavigationProperty Name="EnrollInACourses" Relationship="Self.FK_EnrollInACourse_Student" FromRole="Student" ToRole="EnrollInACourse" />
           <NavigationProperty Name="Results" Relationship="Self.FK_Result_Student" FromRole="Student" ToRole="Result" />
@@ -702,13 +702,13 @@
             <EntityTypeMapping TypeName="UniversityMvcDBModel.Student">
               <MappingFragment StoreEntitySet="Student">
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="RegNo" ColumnName="RegNo" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
-                <ScalarProperty Name="RegNo" ColumnName="RegNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

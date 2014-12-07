@@ -63,13 +63,13 @@
       <PropertyRef Name="StudentId" />
     </Key>
     <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegNo" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ContactNo" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DeptId" Type="int" Nullable="false" />
-    <Property Name="RegNo" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

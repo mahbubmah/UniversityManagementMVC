@@ -21,13 +21,13 @@ namespace UniversityMnagementSystemMVC.Models
         }
     
         public int StudentId { get; set; }
+        public int RegNo { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string ContactNo { get; set; }
         public System.DateTime Date { get; set; }
         public string Address { get; set; }
         public int DeptId { get; set; }
-        public int RegNo { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual ICollection<EnrollInACourse> EnrollInACourses { get; set; }

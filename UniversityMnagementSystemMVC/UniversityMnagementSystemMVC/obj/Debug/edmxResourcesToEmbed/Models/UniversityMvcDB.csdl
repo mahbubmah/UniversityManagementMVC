@@ -82,13 +82,13 @@
       <PropertyRef Name="StudentId" />
     </Key>
     <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegNo" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DeptId" Type="Int32" Nullable="false" />
-    <Property Name="RegNo" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Department" Relationship="Self.FK_Student_Department" FromRole="Student" ToRole="Department" />
     <NavigationProperty Name="EnrollInACourses" Relationship="Self.FK_EnrollInACourse_Student" FromRole="Student" ToRole="EnrollInACourse" />
     <NavigationProperty Name="Results" Relationship="Self.FK_Result_Student" FromRole="Student" ToRole="Result" />

@@ -14,6 +14,20 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+
+        public PartialViewResult StudentView()
+        {
+            var student = db.Students.First();
+            return PartialView("_StudentViewPartial");
+        }
+
+        [HttpPost]
+        public PartialViewResult StudentView(int id)
+        {
+            var student = db.Students.SingleOrDefault(x => x.StudentId == id);
+            return PartialView("_StudentViewPartial",student);
+        }
+
         // GET: EnrollInACourses
         public ActionResult Index()
         {
@@ -39,8 +53,8 @@ namespace UniversityMnagementSystemMVC.Controllers
         // GET: EnrollInACourses/Create
         public ActionResult Create()
         {
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name");
-            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "Name");
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Code");
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "RegNo");
             return View();
         }
 

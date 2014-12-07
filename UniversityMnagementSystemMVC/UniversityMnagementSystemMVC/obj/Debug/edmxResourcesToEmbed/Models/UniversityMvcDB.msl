@@ -69,13 +69,13 @@
       <EntityTypeMapping TypeName="UniversityMvcDBModel.Student">
         <MappingFragment StoreEntitySet="Student">
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="DeptId" ColumnName="DeptId" />
-          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
