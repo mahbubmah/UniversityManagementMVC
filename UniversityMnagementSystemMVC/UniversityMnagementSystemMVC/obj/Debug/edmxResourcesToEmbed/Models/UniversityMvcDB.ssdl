@@ -10,6 +10,9 @@
     <Property Name="FromTime" Type="datetime" Nullable="false" />
     <Property Name="ToTime" Type="datetime" Nullable="false" />
     <Property Name="RoomNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Day" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FromAMPM" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToAMPM" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Course">
     <Key>

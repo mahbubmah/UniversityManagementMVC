@@ -1,33 +1,17 @@
 ﻿@model IEnumerable<UniversityMnagementSystemMVC.Models.AllocateClassRoom>
 
-
 <table class="table">
-    <tr>
-        <th>
-
-        </th>
-        <th>
-
-        </th>
-        <th>
-
-        </th>
-        <th>
-            <label>Schedule Information</label>
-        </th>
-        <th>
-
-        </th>
-        <th>
-
-        </th>
-    </tr>
+    
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Course.Code)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Course.Name)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model=>model.Day)
         </th>
 
         <th>
@@ -59,18 +43,20 @@
                     </td>
                     code = item.Course.Code;
                 }
+                
                 else
                 {
                     <td></td>
                     <td></td>
                 }
-
-
                 <td>
-                    @Html.DisplayFor(modelItem => item.FromTime)
+                    @Html.DisplayFor(modelItem=>item.Day)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ToTime)
+                   @item.FromTime.ToString("hh:mm tt")
+                </td>
+                <td>
+                    @item.ToTime.ToString("hh:mm tt")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RoomNo)

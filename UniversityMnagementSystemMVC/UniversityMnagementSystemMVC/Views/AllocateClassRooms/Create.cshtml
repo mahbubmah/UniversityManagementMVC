@@ -4,12 +4,13 @@
     ViewBag.Title = "Create";
 }
 
+
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>AllocateClassRoom</h4>
         <hr />
@@ -17,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DeptId, "Department Code", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DeptId", null,"--Select--" , new { @class = "form-control" })
+                @Html.DropDownList("DeptId", null, "--Select--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,29 +26,55 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CourseId, "Course Code", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CourseId", null,"--Select--" , new { @class = "form-control" })
+                @Html.DropDownList("CourseId", null, "--Select--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Day, "Day", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Day", new List<SelectListItem>
+                {
+                    new SelectListItem(){ Text = "Saturday", Value = "Saturday"},
+                    new SelectListItem(){ Text = "Sunday", Value = "Sunday"},
+                    new SelectListItem(){ Text = "Monday", Value = "Monday"},
+                    new SelectListItem(){ Text = "Tuesday", Value = "Tuesday"},
+                    new SelectListItem(){ Text = "Wednesday", Value = "Wednesday"},
+                    new SelectListItem(){ Text = "Thursday", Value = "Thursday"},
+                    new SelectListItem(){ Text = "Friday", Value = "Friday"}
+
+                }, "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Day, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FromTime, "From", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FromTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FromTime, "", new { @class = "text-danger" })
+                @Html.TextBox("fHH",null,new{@style="width: 25px" ,placeholder="hh"}):
+                @Html.TextBox("fMM", null, new { @style = "width: 30px", placeholder = "mm" })
+                AM
+                @Html.RadioButton("fromAMPM","AM",true)
+                PM
+                @Html.RadioButton("fromAMPM","PM")
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ToTime, "To", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ToTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ToTime, "", new { @class = "text-danger" })
+                @Html.TextBox("toHH", null, new { @style = "width: 25px", placeholder = "hh" }):
+                @Html.TextBox("toMM", null, new { @style = "width: 30px", placeholder = "mm" })
+                AM
+                @Html.RadioButton("toAMPM", "AM", true)
+                PM
+                @Html.RadioButton("toAMPM", "PM")
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RoomNo,"Room No" , new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RoomNo, "Room No", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("RoomNo", new List<SelectListItem>
                 {

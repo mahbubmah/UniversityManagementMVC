@@ -20,6 +20,9 @@ namespace UniversityMnagementSystemMVC.Models
         public System.DateTime FromTime { get; set; }
         public System.DateTime ToTime { get; set; }
         public string RoomNo { get; set; }
+        public string Day { get; set; }
+        public string FromAMPM { get; set; }
+        public string ToAMPM { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Department Department { get; set; }

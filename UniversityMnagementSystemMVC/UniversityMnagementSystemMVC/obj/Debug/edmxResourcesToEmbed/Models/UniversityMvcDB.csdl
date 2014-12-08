@@ -10,6 +10,9 @@
     <Property Name="FromTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ToTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="RoomNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FromAMPM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ToAMPM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Course" Relationship="Self.FK_AllocateClassRoom_Course" FromRole="AllocateClassRoom" ToRole="Course" />
     <NavigationProperty Name="Department" Relationship="Self.FK_AllocateClassRoom_Department" FromRole="AllocateClassRoom" ToRole="Department" />
   </EntityType>

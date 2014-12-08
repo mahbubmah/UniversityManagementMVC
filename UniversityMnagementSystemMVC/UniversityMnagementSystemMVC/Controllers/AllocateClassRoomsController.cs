@@ -43,8 +43,8 @@ namespace UniversityMnagementSystemMVC.Controllers
         public ActionResult Index()
         {
             ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code");
-            var allocateClassRooms = db.AllocateClassRooms.Include(a => a.Course).Include(a => a.Department);
-            return View(allocateClassRooms.ToList());
+            var allocateClassRooms = db.AllocateClassRooms.Include(a => a.Course).Include(a => a.Department).ToList();
+            return View(allocateClassRooms);
         }
 
         // GET: AllocateClassRooms/Details/5
@@ -65,6 +65,8 @@ namespace UniversityMnagementSystemMVC.Controllers
         // GET: AllocateClassRooms/Create
         public ActionResult Create()
         {
+           
+            
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name");
             ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code");
             return View();
@@ -75,21 +77,42 @@ namespace UniversityMnagementSystemMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AllocateClassRoomId,DeptId,CourseId,FromTime,ToTime,RoomNo")] AllocateClassRoom allocateClassRoom)
+        public ActionResult Create([Bind(Include = "AllocateClassRoomId,DeptId,CourseId,RoomNo,Day,ToAMPM,FromAMPM")] AllocateClassRoom allocateClassRoom, int fHH, int toHH, int fMM, int toMM)
         {
             if (ModelState.IsValid)
             {
-                var allocate = db.AllocateClassRooms.Where(x=>x.RoomNo==allocateClassRoom.RoomNo).ToList();
+                var allocate = db.AllocateClassRooms.Where(x => x.RoomNo == allocateClassRoom.RoomNo).ToList();
                 bool IsTimeAvailable = true;
+                if (allocateClassRoom.FromAMPM == "PM")
+                {
+                    fHH += 12;
+                }
+
+                if (allocateClassRoom.ToAMPM == "PM")
+                {
+                    toHH += 12;
+                }
+
+                DateTime fDt = new DateTime(2012, 01, 01);
+                DateTime toDt = new DateTime(2012, 01, 01);
+                TimeSpan fTime = new TimeSpan(fHH, fMM,0);
+                TimeSpan toTime = new TimeSpan(toHH, toMM,0);
+                fDt = fDt + fTime;
+                toDt = toDt + toTime;
+                allocateClassRoom.FromTime = Convert.ToDateTime(fDt.ToString("g"));
+                allocateClassRoom.ToTime = Convert.ToDateTime(toDt.ToString("g"));
 
                 foreach (var source in allocate)
                 {
-                        if (!(((allocateClassRoom.FromTime > source.FromTime) & (allocateClassRoom.ToTime > source.ToTime)) | ((allocateClassRoom.FromTime < source.FromTime) & (allocateClassRoom.ToTime < source.ToTime))))
-                        {
-                            IsTimeAvailable = false;
-                            ViewBag.noTime = "This time is not available";
-                            break;
-                        }
+                    if (allocateClassRoom.Day == source.Day)
+                    {
+                            if (!(((allocateClassRoom.FromTime > source.FromTime) & (allocateClassRoom.ToTime > source.ToTime)) | ((allocateClassRoom.FromTime < source.FromTime) & (allocateClassRoom.ToTime < source.ToTime))))
+                            {
+                                    IsTimeAvailable = false;
+                                    ViewBag.noTime = "This time is not available";
+                                    break;
+                            }
+                    }
                 }
 
                 if (IsTimeAvailable)
@@ -160,7 +183,7 @@ namespace UniversityMnagementSystemMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            
+
             AllocateClassRoom allocateClassRoom = db.AllocateClassRooms.Find(id);
             db.AllocateClassRooms.Remove(allocateClassRoom);
             db.SaveChanges();

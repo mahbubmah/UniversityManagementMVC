@@ -10,6 +10,9 @@
           <ScalarProperty Name="FromTime" ColumnName="FromTime" />
           <ScalarProperty Name="ToTime" ColumnName="ToTime" />
           <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="FromAMPM" ColumnName="FromAMPM" />
+          <ScalarProperty Name="ToAMPM" ColumnName="ToAMPM" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
