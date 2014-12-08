@@ -84,7 +84,7 @@ namespace UniversityMnagementSystemMVC.Controllers
 
                 foreach (var source in allocate)
                 {
-                        if (!(((allocateClassRoom.FromTime >= source.FromTime) && (allocateClassRoom.ToTime >= source.ToTime)) || ((allocateClassRoom.FromTime <= source.FromTime) && (allocateClassRoom.ToTime <= source.ToTime))))
+                        if (!(((allocateClassRoom.FromTime > source.FromTime) & (allocateClassRoom.ToTime > source.ToTime)) | ((allocateClassRoom.FromTime < source.FromTime) & (allocateClassRoom.ToTime < source.ToTime))))
                         {
                             IsTimeAvailable = false;
                             ViewBag.noTime = "This time is not available";

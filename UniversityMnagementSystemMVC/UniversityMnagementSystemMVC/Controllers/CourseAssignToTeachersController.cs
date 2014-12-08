@@ -97,17 +97,29 @@ namespace UniversityMnagementSystemMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CourseAssignToTeacherId,CourseId,DeptId,TeacherId")] CourseAssignToTeacher courseAssignToTeacher)
         {
-            if (ModelState.IsValid)
+            var creditToTeacher = db.CourseAssignToTeachers.Where(x => x.TeacherId == courseAssignToTeacher.TeacherId).ToList();
+            
+            int creditTakenAllready = 0;
+            foreach (var teacher in creditToTeacher)
+            {
+                var course = db.Courses.SingleOrDefault(x => x.CourseId == teacher.CourseId);
+                creditTakenAllready += course.Credit;
+            }
+            var courseToBeTake = db.Courses.SingleOrDefault(x => x.CourseId == courseAssignToTeacher.CourseId);
+            creditTakenAllready += courseToBeTake.Credit;
+
+            if (ModelState.IsValid && creditTakenAllready <= db.Teachers.SingleOrDefault(x=>x.TeacherId==courseAssignToTeacher.TeacherId).CreditTobeTaken)
             {
                 db.CourseAssignToTeachers.Add(courseAssignToTeacher);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.noCredit = "Try another teacher to assign this course";
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", courseAssignToTeacher.CourseId);
             ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code", courseAssignToTeacher.DeptId);
             ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "Name", courseAssignToTeacher.TeacherId);
-            return View(courseAssignToTeacher);
+            return RedirectToAction("Create");
         }
 
         // GET: CourseAssignToTeachers/Edit/5

@@ -36,8 +36,7 @@
         <div class="form-group" id="course">
             @Html.Partial("_CourseViewPartial")
         </div>
-
-
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.TeacherId, "Teacher's name", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -54,6 +53,12 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Assing" class="btn btn-success" />
+
+                @if (ViewBag.noCredit != null)
+                {
+                    <label style="color: red">@ViewBag.noCredit</label>
+                }
+                
             </div>
         </div>
     </div>

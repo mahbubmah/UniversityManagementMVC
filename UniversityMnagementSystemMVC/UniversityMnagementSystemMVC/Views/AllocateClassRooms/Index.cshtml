@@ -23,6 +23,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <div id="allocateInfo">
     @Html.Partial("_AllocateClassRoomPartial")
 </div>
@@ -48,7 +49,7 @@
         $(function() {
             $("#DeptId").change(function () {
                 var id = $("#DeptId").val();
-                $("#allocateInfo").load("_AllocateClassRoomPartial", { id: id });
+                $("#allocateInfo").load("AllocateClassRooms/_AllocateClassRoomPartial", { id: id });
             });
         });
     </script>
