@@ -1,5 +1,7 @@
 ﻿@model UniversityMnagementSystemMVC.Models.Student
 
+<p>@Html.ActionLink("Make PDF","Pdf","Results",new{id=Model.StudentId},null)</p>
+
 @if (Model != null)
 {
     <div>

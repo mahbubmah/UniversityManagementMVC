@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RazorPDF;
 using UniversityMnagementSystemMVC.Models;
 
 namespace UniversityMnagementSystemMVC.Controllers
@@ -14,6 +15,14 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+        public ActionResult Pdf(int id)
+        {
+            var student = db.Students.SingleOrDefault(x => x.StudentId == id);
+            var results = db.Results.Where(x => x.StuentId == id).ToList();
+            Tuple<Student,IEnumerable<Result>> aTuple=new Tuple<Student, IEnumerable<Result>>(student,results);
+            
+            return new PdfResult(aTuple,"Pdf");
+        }
 
         public PartialViewResult StudentView()
         {
@@ -29,7 +38,6 @@ namespace UniversityMnagementSystemMVC.Controllers
         [HttpPost]
         public PartialViewResult _ResultPartial(int id)
         {
-            
             var results = db.Results.Where(x=>x.StuentId==id);
             return PartialView(results.ToList());
         }
