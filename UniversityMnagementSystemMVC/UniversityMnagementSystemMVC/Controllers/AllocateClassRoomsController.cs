@@ -35,7 +35,7 @@ namespace UniversityMnagementSystemMVC.Controllers
         [HttpPost]
         public PartialViewResult _AllocateClassRoomPartial(int id)
         {
-            var allocateClassRoomList = db.AllocateClassRooms.Where(x => x.DeptId == id).ToList();
+            var allocateClassRoomList = db.AllocateClassRooms.Where(x => x.DeptId == id).OrderBy(x=>x.CourseId).ToList();
             return PartialView(allocateClassRoomList);
         }
 
@@ -43,7 +43,7 @@ namespace UniversityMnagementSystemMVC.Controllers
         public ActionResult Index()
         {
             ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code");
-            var allocateClassRooms = db.AllocateClassRooms.Include(a => a.Course).Include(a => a.Department).ToList();
+            var allocateClassRooms = db.AllocateClassRooms.Include(a => a.Course).Include(a => a.Department).OrderBy(x=>x.CourseId).ToList();
             return View(allocateClassRooms);
         }
 

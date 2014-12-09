@@ -15,6 +15,12 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+        [HttpPost]
+        public PartialViewResult StudentViewCreate(int id)
+        {
+            var student = db.Students.SingleOrDefault(x => x.StudentId == id);
+            return PartialView("_StudentViewResultPartial", student);
+        }
         public ActionResult Pdf(int id)
         {
             var student = db.Students.SingleOrDefault(x => x.StudentId == id);

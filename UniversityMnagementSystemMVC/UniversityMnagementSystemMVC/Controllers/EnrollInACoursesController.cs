@@ -25,7 +25,7 @@ namespace UniversityMnagementSystemMVC.Controllers
         public PartialViewResult StudentView(int id)
         {
             var student = db.Students.SingleOrDefault(x => x.StudentId == id);
-            return PartialView("_StudentViewPartial",student);
+            return PartialView("_StudentViewResultPartial",student);
         }
 
         // GET: EnrollInACourses
