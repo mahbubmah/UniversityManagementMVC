@@ -83,12 +83,12 @@ namespace UniversityMnagementSystemMVC.Controllers
             {
                 var allocate = db.AllocateClassRooms.Where(x => x.RoomNo == allocateClassRoom.RoomNo).ToList();
                 bool IsTimeAvailable = true;
-                if (allocateClassRoom.FromAMPM == "PM")
+                if ((allocateClassRoom.FromAMPM == "PM")&&!(fHH>=12))
                 {
                     fHH += 12;
                 }
 
-                if (allocateClassRoom.ToAMPM == "PM")
+                if ((allocateClassRoom.ToAMPM == "PM") && !(toHH >= 12))
                 {
                     toHH += 12;
                 }
