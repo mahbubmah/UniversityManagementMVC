@@ -60,6 +60,8 @@ namespace UniversityMnagementSystemMVC.Controllers
                 try
                 {
                     db.SaveChanges();
+                    var stu = db.Students.SingleOrDefault(x => x.RegNo == student.RegNo);
+                    return View("RegistrationNumberView",stu);
                 }
                 catch (Exception exception)
                 {

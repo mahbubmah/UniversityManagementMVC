@@ -292,6 +292,7 @@
     <Content Include="Views\Shared\ErrorPage.cshtml" />
     <Content Include="Views\CourseAssignToTeachers\_ForceCourseAssignToTeacherPartial.cshtml" />
     <Content Include="Views\CourseAssignToTeachers\CreateForce.cshtml" />
+    <Content Include="Views\Students\RegistrationNumberView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

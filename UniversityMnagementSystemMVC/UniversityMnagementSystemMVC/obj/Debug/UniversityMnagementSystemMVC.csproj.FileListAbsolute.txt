@@ -59,3 +59,4 @@ J:\Project\UniversityMnagementSystemMVC\UniversityMnagementSystemMVC\obj\Debug\U
 J:\Project\UniversityMnagementSystemMVC\UniversityMnagementSystemMVC\obj\Debug\UniversityMnagementSystemMVC.pdb
 J:\Project\UniversityMnagementSystemMVC\UniversityMnagementSystemMVC\bin\itextsharp.dll
 J:\Project\UniversityMnagementSystemMVC\UniversityMnagementSystemMVC\bin\RazorPDF.dll
+J:\Project\UniversityMnagementSystemMVC\UniversityMnagementSystemMVC\obj\Debug\UniversityMnagementSystemMVC.csprojResolveAssemblyReference.cache
