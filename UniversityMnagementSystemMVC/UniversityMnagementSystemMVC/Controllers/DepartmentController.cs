@@ -51,7 +51,15 @@ namespace UniversityMnagementSystemMVC.Controllers
             if (ModelState.IsValid)
             {
                 db.Departments.Add(department);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+
+                    return View("ErrorPage");
+                }
                 return RedirectToAction("Index");
             }
 
@@ -83,7 +91,15 @@ namespace UniversityMnagementSystemMVC.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(department).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+
+                    return View("ErrorPage");
+                }
                 return RedirectToAction("Index");
             }
             return View(department);
@@ -111,7 +127,15 @@ namespace UniversityMnagementSystemMVC.Controllers
         {
             Department department = db.Departments.Find(id);
             db.Departments.Remove(department);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+
+                return View("ErrorPage");
+            }
             return RedirectToAction("Index");
         }
 

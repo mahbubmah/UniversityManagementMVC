@@ -53,7 +53,15 @@ namespace UniversityMnagementSystemMVC.Controllers
             if (ModelState.IsValid)
             {
                 db.Teachers.Add(teacher);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+
+                    return View("ErrorPage");
+                }
                 return RedirectToAction("Index");
             }
 
@@ -87,7 +95,15 @@ namespace UniversityMnagementSystemMVC.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(teacher).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+
+                    return View("ErrorPage");
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code", teacher.DeptId);
@@ -116,7 +132,15 @@ namespace UniversityMnagementSystemMVC.Controllers
         {
             Teacher teacher = db.Teachers.Find(id);
             db.Teachers.Remove(teacher);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+
+                return View("ErrorPage");
+            }
             return RedirectToAction("Index");
         }
 

@@ -14,6 +14,28 @@ namespace UniversityMnagementSystemMVC.Controllers
     {
         private UniversityMvcDBEntities db = new UniversityMvcDBEntities();
 
+        
+        public ActionResult CreateForceAC([Bind(Include = "CourseAssignToTeacherId,CourseId,DeptId,TeacherId")] CourseAssignToTeacher courseAssignToTeacher)
+        {
+            if (ModelState.IsValid)
+            {
+                db.CourseAssignToTeachers.Add(courseAssignToTeacher);
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+
+                    return View("ErrorPage");
+                }
+                return RedirectToAction("Index");
+            }
+            return View("Index");
+        }
+        
+
         [HttpPost]
         public ActionResult DeleteAll()
         {
@@ -22,7 +44,15 @@ namespace UniversityMnagementSystemMVC.Controllers
             {
                 db.CourseAssignToTeachers.Remove(toTeacher);
             }
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+
+                return View("ErrorPage");
+            }
             return RedirectToAction("Index");
         }
 
@@ -89,7 +119,8 @@ namespace UniversityMnagementSystemMVC.Controllers
             ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "Name");
             return View();
         }
-
+        
+        
         // POST: CourseAssignToTeachers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -111,15 +142,26 @@ namespace UniversityMnagementSystemMVC.Controllers
             if (ModelState.IsValid && creditTakenAllready <= db.Teachers.SingleOrDefault(x=>x.TeacherId==courseAssignToTeacher.TeacherId).CreditTobeTaken)
             {
                 db.CourseAssignToTeachers.Add(courseAssignToTeacher);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+                    ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", courseAssignToTeacher.CourseId);
+                    ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code", courseAssignToTeacher.DeptId);
+                    ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "Name", courseAssignToTeacher.TeacherId);
+                    ViewBag.noCredit = "This course already assigned by another teacher, Please select another coures to assign this teacher";
+                    return View();
+                }
                 return RedirectToAction("Index");
             }
-
-            ViewBag.noCredit = "Try another teacher to assign this course";
+            
+            ViewBag.noCredit = "This teacher can't take more credit";
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", courseAssignToTeacher.CourseId);
             ViewBag.DeptId = new SelectList(db.Departments, "DeptId", "Code", courseAssignToTeacher.DeptId);
             ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "Name", courseAssignToTeacher.TeacherId);
-            return RedirectToAction("Create");
+            return View("CreateForce",courseAssignToTeacher);
         }
 
         // GET: CourseAssignToTeachers/Edit/5
@@ -150,7 +192,15 @@ namespace UniversityMnagementSystemMVC.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(courseAssignToTeacher).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+
+                    return View("ErrorPage");
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", courseAssignToTeacher.CourseId);
@@ -181,7 +231,15 @@ namespace UniversityMnagementSystemMVC.Controllers
         {
             CourseAssignToTeacher courseAssignToTeacher = db.CourseAssignToTeachers.Find(id);
             db.CourseAssignToTeachers.Remove(courseAssignToTeacher);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+
+                return View("ErrorPage");
+            }
             return RedirectToAction("Index");
         }
 

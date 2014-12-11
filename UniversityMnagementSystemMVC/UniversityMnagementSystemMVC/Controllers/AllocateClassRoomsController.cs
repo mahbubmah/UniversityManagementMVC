@@ -22,7 +22,16 @@ namespace UniversityMnagementSystemMVC.Controllers
             {
                 db.AllocateClassRooms.Remove(allocate);
             }
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+
+                return View("ErrorPage");
+            }
+            
             return RedirectToAction("Index");
         }
 
@@ -118,7 +127,15 @@ namespace UniversityMnagementSystemMVC.Controllers
                 if (IsTimeAvailable)
                 {
                     db.AllocateClassRooms.Add(allocateClassRoom);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception exception)
+                    {
+
+                        return View("ErrorPage");
+                    }
                     return RedirectToAction("Index");
                 }
             }
@@ -155,7 +172,15 @@ namespace UniversityMnagementSystemMVC.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(allocateClassRoom).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+
+                    return View("ErrorPage");
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", allocateClassRoom.CourseId);
@@ -186,7 +211,15 @@ namespace UniversityMnagementSystemMVC.Controllers
 
             AllocateClassRoom allocateClassRoom = db.AllocateClassRooms.Find(id);
             db.AllocateClassRooms.Remove(allocateClassRoom);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+
+                return View("ErrorPage");
+            }
             return RedirectToAction("Index");
         }
 

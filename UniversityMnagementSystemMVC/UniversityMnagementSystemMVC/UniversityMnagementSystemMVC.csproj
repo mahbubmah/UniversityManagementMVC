@@ -289,6 +289,9 @@
     <Content Include="Views\AllocateClassRooms\_AllocateClassRoomPartial.cshtml" />
     <Content Include="Views\Results\Pdf.cshtml" />
     <Content Include="Views\Shared\_StudentViewResultPartial.cshtml" />
+    <Content Include="Views\Shared\ErrorPage.cshtml" />
+    <Content Include="Views\CourseAssignToTeachers\_ForceCourseAssignToTeacherPartial.cshtml" />
+    <Content Include="Views\CourseAssignToTeachers\CreateForce.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

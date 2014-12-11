@@ -1,6 +1,6 @@
 ﻿@model UniversityMnagementSystemMVC.Models.Student
 
-<p>@Html.ActionLink("Make PDF","Pdf","Results",new{id=Model.StudentId},null)</p>
+
 
 @if (Model != null)
 {
@@ -32,5 +32,5 @@
 
         </dl>
     </div>
-
+    <p>@Html.ActionLink("Make PDF", "Pdf", "Results", new { id = Model.StudentId }, new { @class = "btn btn-success" })</p>
 }
